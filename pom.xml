@@ -1,0 +1,186 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.itd.tdd</groupId>
+    <artifactId>tictactoe-full</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>tictactoe-full</name>
+    <url>http://maven.apache.org</url>
+
+    <build>
+        <finalName>tictactoe-full</finalName>
+        <plugins>
+            <!-- Jacoco. Test coverage measurement -->
+            <!-- http://www.eclemma.org/jacoco/trunk/doc/maven.html -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+                <version>3.9.5</version>
+                <executions>
+                    <execution>
+                        <id>run-stories-as-embeddables</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <scope>test</scope>
+                            <includes>
+                                <include>**/JbehaveRunner.java</include>
+                            </includes>
+                            <ignoreFailureInStories>true</ignoreFailureInStories>
+                            <ignoreFailureInView>false</ignoreFailureInView>
+                        </configuration>
+                        <goals>
+                            <goal>run-stories-as-embeddables</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-stepdocs</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <includes>
+                                <include>**/JbehaveRunner.java</include>
+                            </includes>
+                        </configuration>
+                        <goals>
+                            <goal>report-stepdocs-as-embeddables</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<source>1.6</source>-->
+                    <!--<target>1.6</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>2.24.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-smpp</artifactId>
+            <version>2.24.1</version>
+        </dependency>
+
+
+        <!-- JEE -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- MongoDB. NoSql DB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <!-- MongoDB util -->
+        <dependency>
+            <groupId>org.jongo</groupId>
+            <artifactId>jongo</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
+        <!-- Testing dependencies -->
+
+        <!-- JMockit. Mocking framework -->
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.9</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Junit. Testing framework -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Hamcrest. Testing framework util - natively supportted by junit-->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- AssertJ. Testing framework util - fluent, assertions can be concatenated -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito. Mocking framework -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+
+         <!--TestNG. Testing framework-->
+        <!--<dependency>-->
+            <!--<groupId>org.testng</groupId>-->
+            <!--<artifactId>testng</artifactId>-->
+            <!--<version>6.11</version>-->
+        <!--</dependency>-->
+
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+</project>
